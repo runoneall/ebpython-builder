@@ -37,7 +37,7 @@
         console.log('build', name)
 
         const config_path = join(config_dir, name)
-        const ebpython_config = require(config_path)
+        const ebpython_config = JSON.parse(fs.readFileSync(config_path))
 
         spawn(`${join('.', ebpython_bin)} ${config_path}`, { stdio: 'inherit' })
 
