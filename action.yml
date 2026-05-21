@@ -31,7 +31,7 @@ runs:
               CONFIG_DIR: ${{ inputs.config-dir }}
               CUSTOM_EBPYTHON_OS_ARCH: ${{ inputs.custom-ebpython-os-arch }}
               CUSTOM_EBPYTHON_VERSION: ${{ inputs.custom-ebpython-version }}
-          run: node ${{ github.action_path }}/builder.js
+          run: node ${{ github.action_path }}/builder.cjs
 
         - name: 输出构建产物存放目录
           id: dist-output
