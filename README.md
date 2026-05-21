@@ -10,6 +10,8 @@ runoneall/ebpython 的 github 工作流步骤
 
 在 `src` 目录中，存放了所有项目代码，当然，在这个示例项目中，只有 `app.py`，该文件会被 `launcher` 启动，需要作为整个项目的入口点文件
 
+在 `.github\workflows\build.yml` 文件中，指示了如何在工作流中使用 ebpython-builder 打包项目并发布到 release
+
 ## 更多信息
 
 该工作流步骤的底层实现是 `runoneall/ebpython`，需要了解更多信息，转到 https://github.com/runoneall/ebpython
