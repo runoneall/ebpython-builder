@@ -1,0 +1,33 @@
+name: ebpython builder
+description: runoneall/ebpython 的 github 工作流步骤
+
+inputs:
+    config-dir:
+        description: 构建配置存放在哪里?
+        required: false
+        default: .ebpython-builder
+
+    custom-ebpython:
+        description: 如果工作流的运行机器不是 linux/amd64, 则需要更改这里
+        required: false
+        default: linux-amd64
+
+outputs:
+    dist-output:
+        description: '构建产物存放目录'
+        value: ${{ steps.dist-output.outputs.dir }}
+
+runs:
+    using: composite
+    steps:
+        - name: 执行打包操作
+          shell: bash
+          env:
+              CONFIG_DIR: ${{ inputs.config-dir }}
+              CUSTOM_EBPYTHON: ${{ inputs.custom-ebpython }}
+          run: node ${{ github.action_path }}/builder.js
+
+        - name: 输出构建产物存放目录
+          id: dist-output
+          shell: bash
+          run: echo "dir=$(cat .ebpython-builder-dist-output-dir)" >> $GITHUB_OUTPUT
