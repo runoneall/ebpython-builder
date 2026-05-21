@@ -1,0 +1,35 @@
+{
+    "source": "src",
+    "output": "dist",
+
+    "python": {
+        "release": "20260510",
+        "version": "3.12.13",
+
+        "local": {
+            "arch": "x86_64",
+            "os": "unknown-linux-gnu",
+            "flag": "install_only_stripped",
+            "ext": "tar.gz"
+        },
+
+        "target": {
+            "arch": "aarch64",
+            "os": "unknown-linux-gnu",
+            "flag": "install_only_stripped",
+            "ext": "tar.gz"
+        }
+    },
+
+    "pip": {
+        "platform": "manylinux2014_aarch64",
+        "download": ["rich"]
+    },
+
+    "launcher": {
+        "goos": "linux",
+        "goarch": "arm64",
+        "main": "app.py",
+        "name": "我的应用程序"
+    }
+}

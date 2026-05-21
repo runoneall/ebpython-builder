@@ -1,0 +1,35 @@
+{
+    "source": "src",
+    "output": "dist",
+
+    "python": {
+        "release": "20260510",
+        "version": "3.12.13",
+
+        "local": {
+            "arch": "x86_64",
+            "os": "unknown-linux-gnu",
+            "flag": "install_only_stripped",
+            "ext": "tar.gz"
+        },
+
+        "target": {
+            "arch": "x86_64",
+            "os": "pc-windows-msvc",
+            "flag": "install_only_stripped",
+            "ext": "tar.gz"
+        }
+    },
+
+    "pip": {
+        "platform": "win_amd64",
+        "download": ["rich"]
+    },
+
+    "launcher": {
+        "goos": "windows",
+        "goarch": "amd64",
+        "main": "app.py",
+        "name": "我的应用程序"
+    }
+}
