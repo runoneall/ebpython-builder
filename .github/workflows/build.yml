@@ -1,0 +1,34 @@
+name: ebpython-builder 示例工作流
+
+on:
+    workflow_dispatch:
+        inputs:
+            version:
+                description: '版本'
+                required: true
+                type: string
+
+permissions:
+    contents: write
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 检出代码
+              uses: actions/checkout@main
+
+            - name: 执行打包
+              id: build
+              uses: runoneall/ebpython@main
+
+            - name: 产物总览
+              shell: bash
+              run: ls ${{ steps.build.outputs.dist-output }}
+
+            - name: 上传产物
+              uses: softprops/action-gh-release@master
+              with:
+                  files: ${{ steps.build.outputs.dist-output }}/**
+                  tag_name: ${{ inputs.version }}
+                  make_latest: true

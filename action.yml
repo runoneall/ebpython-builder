@@ -25,6 +25,11 @@ outputs:
 runs:
     using: composite
     steps:
+        - name: 配置 Go 环境
+          uses: actions/setup-go@main
+          with:
+              go-version: '1.26.3'
+
         - name: 执行打包操作
           shell: bash
           env:
