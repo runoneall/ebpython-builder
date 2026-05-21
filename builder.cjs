@@ -3,7 +3,7 @@
     const fs = require('fs')
     const { pipeline } = require('stream/promises')
     const { randomUUID } = require('crypto')
-    const { join } = require('path')
+    const { join, resolve } = require('path')
     const { spawnSync } = require('child_process')
 
     const download = async (url, saveto) => {
@@ -39,12 +39,12 @@
         const config_path = join(config_dir, name)
         const ebpython_config = JSON.parse(fs.readFileSync(config_path))
 
-        const exe_path = join('.', ebpython_bin)
+        const ebpython_bin_abs = resolve(ebpython_bin)
         if (process.platform !== 'win32') {
-            fs.chmodSync(exe_path, 0o755)
+            fs.chmodSync(ebpython_bin_abs, 0o755)
         }
 
-        spawnSync(exe_path, [config_path], { stdio: 'inherit', shell: true })
+        spawnSync(ebpython_bin_abs, [config_path], { stdio: 'inherit' })
 
         const distzipname = ebpython_config.launcher.name + '.zip'
         fs.copyFileSync(join(ebpython_config.output, distzipname), join(output_dir, distzipname))
