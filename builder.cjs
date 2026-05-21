@@ -39,7 +39,12 @@
         const config_path = join(config_dir, name)
         const ebpython_config = JSON.parse(fs.readFileSync(config_path))
 
-        const result = spawnSync(`./${ebpython_bin} ${config_path}`, { stdio: 'inherit', shell: true })
+        const exe_path = join('.', ebpython_bin)
+        if (process.platform !== 'win32') {
+            fs.chmodSync(exe_path, 0o755)
+        }
+
+        const result = spawnSync(exe_path, [config_path], { stdio: 'inherit', shell: true })
         if (result.error) {
             console.error('build', name, 'failed')
             return
