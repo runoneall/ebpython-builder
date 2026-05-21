@@ -39,7 +39,11 @@
         const config_path = join(config_dir, name)
         const ebpython_config = JSON.parse(fs.readFileSync(config_path))
 
-        spawnSync(`${join('.', ebpython_bin)} ${config_path}`, { stdio: 'inherit', shell: true })
+        const result = spawnSync(`./${ebpython_bin} ${config_path}`, { stdio: 'inherit', shell: true })
+        if (result.error) {
+            console.error('build', name, 'failed')
+            return
+        }
 
         const distzipname = ebpython_config.launcher.name + '.zip'
         fs.copyFileSync(join(ebpython_config.output, distzipname), join(output_dir, distzipname))
