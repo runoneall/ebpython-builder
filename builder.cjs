@@ -4,7 +4,7 @@
     const { pipeline } = require('stream/promises')
     const { randomUUID } = require('crypto')
     const { join } = require('path')
-    const { spawn } = require('child_process')
+    const { spawnSync } = require('child_process')
 
     const download = async (url, saveto) => {
         console.log('fetch', url)
@@ -39,7 +39,7 @@
         const config_path = join(config_dir, name)
         const ebpython_config = JSON.parse(fs.readFileSync(config_path))
 
-        spawn(`${join('.', ebpython_bin)} ${config_path}`, { stdio: 'inherit' })
+        spawnSync(`${join('.', ebpython_bin)} ${config_path}`, { stdio: 'inherit', shell: true })
 
         const distzipname = ebpython_config.launcher.name + '.zip'
         fs.copyFileSync(join(ebpython_config.output, distzipname), join(output_dir, distzipname))
