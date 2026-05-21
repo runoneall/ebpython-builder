@@ -20,7 +20,7 @@ jobs:
 
             - name: 执行打包
               id: build
-              uses: runoneall/ebpython@main
+              uses: runoneall/ebpython-builder@main
 
             - name: 产物总览
               shell: bash
