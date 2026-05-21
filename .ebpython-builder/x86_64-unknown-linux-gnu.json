@@ -30,6 +30,6 @@
         "goos": "linux",
         "goarch": "amd64",
         "main": "app.py",
-        "name": "我的应用程序"
+        "name": "demo"
     }
 }
