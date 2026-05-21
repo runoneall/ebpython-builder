@@ -7,10 +7,15 @@ inputs:
         required: false
         default: .ebpython-builder
 
-    custom-ebpython:
+    custom-ebpython-os-arch:
         description: 如果工作流的运行机器不是 linux/amd64, 则需要更改这里
         required: false
         default: linux-amd64
+
+    custom-ebpython-version:
+        description: 自定义 ebpython 的版本, 默认使用 latest
+        required: false
+        default: latest
 
 outputs:
     dist-output:
@@ -24,7 +29,8 @@ runs:
           shell: bash
           env:
               CONFIG_DIR: ${{ inputs.config-dir }}
-              CUSTOM_EBPYTHON: ${{ inputs.custom-ebpython }}
+              CUSTOM_EBPYTHON_OS_ARCH: ${{ inputs.custom-ebpython-os-arch }}
+              CUSTOM_EBPYTHON_VERSION: ${{ inputs.custom-ebpython-version }}
           run: node ${{ github.action_path }}/builder.js
 
         - name: 输出构建产物存放目录
