@@ -46,7 +46,7 @@
 
         spawnSync(ebpython_bin_abs, [config_path], { stdio: 'inherit' })
 
-        const distzipname = ebpython_config.launcher.name + '.zip'
-        fs.copyFileSync(join(ebpython_config.output, distzipname), join(output_dir, distzipname))
+        const name_without_ext = name.replaceAll('.json', '')
+        fs.copyFileSync(join(ebpython_config.output, ebpython_config.launcher.name + '.zip'), join(output_dir, `${ebpython_config.launcher.name}-${name_without_ext}` + '.zip'))
     })
 })()
